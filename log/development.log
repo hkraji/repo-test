@@ -1,0 +1,129 @@
+  [1m[36m (120.0ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [1m[35m (74.0ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to InitialSchema (20131030115830)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (1.0ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "username" varchar(255) NOT NULL, "email" varchar(255), "password_hash" varchar(255) NOT NULL, "first_name" varchar(255) NOT NULL, "last_name" varchar(255) NOT NULL, "max_namespaces" integer DEFAULT 1 NOT NULL, "deleted" boolean DEFAULT 'f' NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (1.0ms)[0m  rollback transaction
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to InitialSchema (20131030115830)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (1.0ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "username" varchar(255) NOT NULL, "email" varchar(255), "password_hash" varchar(255) NOT NULL, "first_name" varchar(255) NOT NULL, "last_name" varchar(255) NOT NULL, "max_namespaces" integer DEFAULT 1 NOT NULL, "deleted" boolean DEFAULT 'f' NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (1.0ms)[0m  rollback transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to InitialSchema (20131030115830)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (2.0ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "username" varchar(255) NOT NULL, "email" varchar(255), "password_hash" varchar(255) NOT NULL, "first_name" varchar(255) NOT NULL, "last_name" varchar(255) NOT NULL, "max_namespaces" integer DEFAULT 1 NOT NULL, "deleted" boolean DEFAULT 'f' NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (1.0ms)[0m  CREATE TABLE "user_groups" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255) NOT NULL, "description" text, "deleted" boolean DEFAULT 'f' NOT NULL, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.0ms)[0m  [1mCREATE TABLE "users_user_groups" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer NOT NULL, "user_group_id" integer NOT NULL, "deleted" boolean DEFAULT 'f' NOT NULL) [0m
+  [1m[35m (1.0ms)[0m  CREATE TABLE "pub_keys" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "value" text NOT NULL, "user_id" integer NOT NULL, "deleted" boolean DEFAULT 'f' NOT NULL, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.0ms)[0m  [1mCREATE TABLE "access_rights" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "permission_hash" text NOT NULL, "checksum" varchar(255) NOT NULL, "deleted" boolean DEFAULT 'f' NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (1.0ms)[0m  CREATE TABLE "namespaces" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255) NOT NULL, "description" text, "access_right_id" integer NOT NULL, "user_id" integer NOT NULL, "user_group_id" integer NOT NULL, "deleted" boolean DEFAULT 'f' NOT NULL, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.0ms)[0m  [1mCREATE TABLE "modules" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255) NOT NULL, "type" varchar(255) NOT NULL, "namespace_id" integer NOT NULL, "access_right_id" integer NOT NULL, "user_id" integer NOT NULL, "user_group_id" integer NOT NULL, "deleted" boolean DEFAULT 'f' NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20131030115830"]]
+  [1m[36m (79.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.0ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mAccessRight Exists (1.0ms)[0m  SELECT 1 AS one FROM "access_rights" WHERE "access_rights"."checksum" = '786348e1435e35d75425f82cb1720249' LIMIT 1
+  [1m[36mSQL (82.0ms)[0m  [1mINSERT INTO "access_rights" ("checksum", "created_at", "permission_hash", "updated_at") VALUES (?, ?, ?, ?)[0m  [["checksum", "786348e1435e35d75425f82cb1720249"], ["created_at", Wed, 30 Oct 2013 13:17:25 UTC +00:00], ["permission_hash", {:user=>"RWP", :user_group=>"RW", :other=>"P"}], ["updated_at", Wed, 30 Oct 2013 13:17:25 UTC +00:00]]
+TypeError: can't cast Hash to text: INSERT INTO "access_rights" ("checksum", "created_at", "permission_hash", "updated_at") VALUES (?, ?, ?, ?)
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mAccessRight Exists (0.0ms)[0m  SELECT 1 AS one FROM "access_rights" WHERE "access_rights"."checksum" = '786348e1435e35d75425f82cb1720249' LIMIT 1
+  [1m[36mSQL (7.0ms)[0m  [1mINSERT INTO "access_rights" ("checksum", "created_at", "permission_hash", "updated_at") VALUES (?, ?, ?, ?)[0m  [["checksum", "786348e1435e35d75425f82cb1720249"], ["created_at", Wed, 30 Oct 2013 13:18:58 UTC +00:00], ["permission_hash", "---\n:user: RWP\n:user_group: RW\n:other: P\n"], ["updated_at", Wed, 30 Oct 2013 13:18:58 UTC +00:00]]
+  [1m[35m (103.0ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mAccessRight Exists (0.0ms)[0m  SELECT 1 AS one FROM "access_rights" WHERE "access_rights"."checksum" = '786348e1435e35d75425f82cb1720249' LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35mAccessRight Load (1.0ms)[0m  SELECT "access_rights".* FROM "access_rights" WHERE "access_rights"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mAccessRight Load (1.0ms)[0m  [1mSELECT "access_rights".* FROM "access_rights" WHERE "access_rights"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.0ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (93.0ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [1m[35m (140.0ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to InitialSchema (20131030115830)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (2.0ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "username" varchar(255) NOT NULL, "email" varchar(255), "first_name" varchar(255) NOT NULL, "last_name" varchar(255) NOT NULL, "max_namespaces" integer DEFAULT 1 NOT NULL, "deleted" boolean DEFAULT 'f' NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (1.0ms)[0m  CREATE TABLE "user_groups" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255) NOT NULL, "description" text, "deleted" boolean DEFAULT 'f' NOT NULL, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (1.0ms)[0m  [1mCREATE INDEX "index_users_user_groups_on_user_id_and_user_group_id" ON "users_user_groups" ("user_id", "user_group_id")[0m
+SQLite3::SQLException: no such table: main.users_user_groups: CREATE  INDEX "index_users_user_groups_on_user_id_and_user_group_id" ON "users_user_groups" ("user_id", "user_group_id")
+  [1m[35m (1.0ms)[0m  rollback transaction
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to InitialSchema (20131030115830)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (1.0ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "username" varchar(255) NOT NULL, "email" varchar(255), "first_name" varchar(255) NOT NULL, "last_name" varchar(255) NOT NULL, "max_namespaces" integer DEFAULT 1 NOT NULL, "deleted" boolean DEFAULT 'f' NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (1.0ms)[0m  CREATE TABLE "user_groups" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255) NOT NULL, "description" text, "deleted" boolean DEFAULT 'f' NOT NULL, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.0ms)[0m  [1mCREATE TABLE "users_user_groups" ("user_id" integer NOT NULL, "user_group_id" integer NOT NULL, "deleted" boolean DEFAULT 'f' NOT NULL) [0m
+  [1m[35m (0.0ms)[0m  CREATE INDEX "index_users_user_groups_on_user_id_and_user_group_id" ON "users_user_groups" ("user_id", "user_group_id")
+  [1m[36m (0.0ms)[0m  [1mCREATE TABLE "pub_keys" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "value" text NOT NULL, "user_id" integer NOT NULL, "deleted" boolean DEFAULT 'f' NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (1.0ms)[0m  CREATE TABLE "access_rights" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "permission_hash" text NOT NULL, "checksum" varchar(255) NOT NULL, "deleted" boolean DEFAULT 'f' NOT NULL, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (1.0ms)[0m  [1mCREATE TABLE "namespaces" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255) NOT NULL, "description" text, "access_right_id" integer NOT NULL, "user_id" integer NOT NULL, "user_group_id" integer NOT NULL, "deleted" boolean DEFAULT 'f' NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (0.0ms)[0m  CREATE TABLE "modules" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255) NOT NULL, "type" varchar(255) NOT NULL, "namespace_id" integer NOT NULL, "access_right_id" integer NOT NULL, "user_id" integer NOT NULL, "user_group_id" integer NOT NULL, "deleted" boolean DEFAULT 'f' NOT NULL, "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20131030115830"]]
+  [1m[35m (65.0ms)[0m  commit transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36m (78.0ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [1m[35m (57.0ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to InitialSchema (20131030115830)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (1.0ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "username" varchar(255) NOT NULL, "email" varchar(255), "first_name" varchar(255) NOT NULL, "last_name" varchar(255) NOT NULL, "max_namespaces" integer DEFAULT 1 NOT NULL, "deleted" boolean DEFAULT 'f' NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (0.0ms)[0m  CREATE TABLE "user_groups" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255) NOT NULL, "description" text, "deleted" boolean DEFAULT 'f' NOT NULL, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.0ms)[0m  [1mCREATE TABLE "users_user_groups" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer NOT NULL, "user_group_id" integer NOT NULL, "deleted" boolean DEFAULT 'f' NOT NULL) [0m
+  [1m[35m (0.0ms)[0m  CREATE INDEX "index_users_user_groups_on_user_id_and_user_group_id" ON "users_user_groups" ("user_id", "user_group_id")
+  [1m[36m (2.0ms)[0m  [1mCREATE TABLE "pub_keys" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "value" text NOT NULL, "user_id" integer NOT NULL, "deleted" boolean DEFAULT 'f' NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (0.0ms)[0m  CREATE TABLE "access_rights" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "permission_hash" text NOT NULL, "checksum" varchar(255) NOT NULL, "deleted" boolean DEFAULT 'f' NOT NULL, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.0ms)[0m  [1mCREATE TABLE "namespaces" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255) NOT NULL, "description" text, "access_right_id" integer NOT NULL, "user_id" integer NOT NULL, "user_group_id" integer NOT NULL, "deleted" boolean DEFAULT 'f' NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (1.0ms)[0m  CREATE TABLE "modules" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255) NOT NULL, "type" varchar(255) NOT NULL, "namespace_id" integer NOT NULL, "access_right_id" integer NOT NULL, "user_id" integer NOT NULL, "user_group_id" integer NOT NULL, "deleted" boolean DEFAULT 'f' NOT NULL, "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20131030115830"]]
+  [1m[35m (49.0ms)[0m  commit transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36m (93.0ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [1m[35m (58.0ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to InitialSchema (20131030115830)
+  [1m[35m (1.0ms)[0m  begin transaction
+  [1m[36m (1.0ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "username" varchar(255) NOT NULL, "email" varchar(255), "first_name" varchar(255) NOT NULL, "last_name" varchar(255) NOT NULL, "max_namespaces" integer DEFAULT 1 NOT NULL, "deleted" boolean DEFAULT 'f' NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (0.0ms)[0m  CREATE TABLE "user_groups" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255) NOT NULL, "description" text, "deleted" boolean DEFAULT 'f' NOT NULL, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.0ms)[0m  [1mCREATE TABLE "users_user_groups" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer NOT NULL, "user_group_id" integer NOT NULL, "deleted" boolean DEFAULT 'f' NOT NULL) [0m
+  [1m[35m (0.0ms)[0m  CREATE INDEX "index_users_user_groups_on_user_id_and_user_group_id" ON "users_user_groups" ("user_id", "user_group_id")
+  [1m[36m (0.0ms)[0m  [1mCREATE TABLE "pub_keys" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "value" text NOT NULL, "user_id" integer NOT NULL, "deleted" boolean DEFAULT 'f' NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (1.0ms)[0m  CREATE TABLE "access_rights" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "permission_hash" text NOT NULL, "checksum" varchar(255) NOT NULL, "deleted" boolean DEFAULT 'f' NOT NULL, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.0ms)[0m  [1mCREATE TABLE "namespaces" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255) NOT NULL, "description" text, "access_right_id" integer NOT NULL, "user_id" integer NOT NULL, "user_group_id" integer NOT NULL, "deleted" boolean DEFAULT 'f' NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (0.0ms)[0m  CREATE TABLE "repo_modules" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255) NOT NULL, "type" varchar(255) NOT NULL, "namespace_id" integer NOT NULL, "access_right_id" integer NOT NULL, "user_id" integer NOT NULL, "user_group_id" integer NOT NULL, "deleted" boolean DEFAULT 'f' NOT NULL, "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20131030115830"]]
+  [1m[35m (136.0ms)[0m  commit transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36m (89.0ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [1m[35m (65.0ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to InitialSchema (20131030115830)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (2.0ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "username" varchar(255) NOT NULL, "email" varchar(255), "first_name" varchar(255) NOT NULL, "last_name" varchar(255) NOT NULL, "max_namespaces" integer DEFAULT 1 NOT NULL, "deleted" boolean DEFAULT 'f' NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (1.0ms)[0m  CREATE TABLE "user_groups" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255) NOT NULL, "description" text, "deleted" boolean DEFAULT 'f' NOT NULL, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (1.0ms)[0m  [1mCREATE TABLE "users_user_groups" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer NOT NULL, "user_group_id" integer NOT NULL, "deleted" boolean DEFAULT 'f' NOT NULL) [0m
+  [1m[35m (0.0ms)[0m  CREATE INDEX "index_users_user_groups_on_user_id_and_user_group_id" ON "users_user_groups" ("user_id", "user_group_id")
+  [1m[36m (1.0ms)[0m  [1mCREATE TABLE "pub_keys" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "value" text NOT NULL, "user_id" integer NOT NULL, "deleted" boolean DEFAULT 'f' NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (0.0ms)[0m  CREATE TABLE "access_rights" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "permission_hash" text NOT NULL, "checksum" varchar(255) NOT NULL, "deleted" boolean DEFAULT 'f' NOT NULL, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (1.0ms)[0m  [1mCREATE TABLE "namespaces" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255) NOT NULL, "description" text, "access_right_id" integer NOT NULL, "user_id" integer NOT NULL, "user_group_id" integer NOT NULL, "deleted" boolean DEFAULT 'f' NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (0.0ms)[0m  CREATE TABLE "repo_modules" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255) NOT NULL, "comp_type" varchar(255) NOT NULL, "namespace_id" integer NOT NULL, "access_right_id" integer NOT NULL, "user_id" integer NOT NULL, "user_group_id" integer NOT NULL, "deleted" boolean DEFAULT 'f' NOT NULL, "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20131030115830"]]
+  [1m[35m (164.0ms)[0m  commit transaction
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36m (117.0ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [1m[35m (62.0ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to InitialSchema (20131030115830)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (1.0ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "username" varchar(255) NOT NULL, "email" varchar(255), "first_name" varchar(255) NOT NULL, "last_name" varchar(255) NOT NULL, "max_namespaces" integer DEFAULT 1 NOT NULL, "deleted" boolean DEFAULT 'f' NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (0.0ms)[0m  CREATE TABLE "user_groups" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255) NOT NULL, "description" text, "deleted" boolean DEFAULT 'f' NOT NULL, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (1.0ms)[0m  [1mCREATE TABLE "users_user_groups" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer NOT NULL, "user_group_id" integer NOT NULL, "deleted" boolean DEFAULT 'f' NOT NULL) [0m
+  [1m[35m (0.0ms)[0m  CREATE INDEX "index_users_user_groups_on_user_id_and_user_group_id" ON "users_user_groups" ("user_id", "user_group_id")
+  [1m[36m (0.0ms)[0m  [1mCREATE TABLE "pub_keys" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "value" text NOT NULL, "user_id" integer NOT NULL, "deleted" boolean DEFAULT 'f' NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (1.0ms)[0m  CREATE TABLE "access_rights" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "permission_hash" text NOT NULL, "checksum" varchar(255) NOT NULL, "deleted" boolean DEFAULT 'f' NOT NULL, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.0ms)[0m  [1mCREATE TABLE "namespaces" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255) NOT NULL, "description" text, "access_right_id" integer NOT NULL, "user_id" integer NOT NULL, "user_group_id" integer NOT NULL, "deleted" boolean DEFAULT 'f' NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (0.0ms)[0m  CREATE TABLE "repo_modules" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255) NOT NULL, "comp_type" varchar(255) NOT NULL, "namespace_id" integer NOT NULL, "access_right_id" integer NOT NULL, "user_id" integer NOT NULL, "user_group_id" integer NOT NULL, "deleted" boolean DEFAULT 'f' NOT NULL, "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20131030115830"]]
+  [1m[35m (80.0ms)[0m  commit transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
